@@ -22,7 +22,7 @@ class Streams extends BaseApi
      */
     public function streamsChannel($channel)
     {
-        $response = $this->client->get(config('twitch-api.api_url') . '/helix/streams/' . $channel);
+        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel);
 
         return $response->json();
     }
@@ -49,7 +49,7 @@ class Streams extends BaseApi
             }
         }
 
-        $response = $this->client->get('/helix/streams/', ['query' => $parameters]);
+        $response = $this->client->get('/kraken/streams/', ['query' => $parameters]);
 
         return $response->json();
     }
@@ -76,7 +76,7 @@ class Streams extends BaseApi
             }
         }
 
-        $response = $this->client->get('/helix/streams/featured', ['query' => $parameters]);
+        $response = $this->client->get('/kraken/streams/featured', ['query' => $parameters]);
 
         return $response->json();
     }
@@ -103,7 +103,7 @@ class Streams extends BaseApi
             }
         }
 
-        $response = $this->client->get('/helix/streams/summary', ['query' => $parameters]);
+        $response = $this->client->get('/kraken/streams/summary', ['query' => $parameters]);
 
         return $response->json();
     }

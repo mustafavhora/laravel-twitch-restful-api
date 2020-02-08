@@ -41,7 +41,7 @@ class Follow extends BaseApi
             }
         }
 
-        $url = 'https://api.twitch.tv/helix/channels/' . $channel . '/follows';
+        $url = 'https://api.twitch.tv/kraken/channels/' . $channel . '/follows';
 
         $response = $this->client->get($url, ['body' => $options]);
 
@@ -75,7 +75,7 @@ class Follow extends BaseApi
             }
         }
 
-        $url = 'helix/users/' . $user . '/follows/channels';
+        $url = 'kraken/users/' . $user . '/follows/channels';
 
         $response = $this->client->get($url, ['body' => $options]);
 
@@ -92,7 +92,7 @@ class Follow extends BaseApi
      */
     public function userFollowsChannel($user, $channel)
     {
-        $response = $this->client->get('helix/users/' . $user . '/follows/channels/' . $channel);
+        $response = $this->client->get('kraken/users/' . $user . '/follows/channels/' . $channel);
 
         return $response->json();
     }
@@ -101,7 +101,7 @@ class Follow extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = 'https://api.twitch.tv/helix/users/' . $user . '/follows/channels/' . $channel;
+        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/follows/channels/' . $channel;
 
         $availableOptions = ['notifications'];
 
@@ -150,7 +150,7 @@ class Follow extends BaseApi
         $token = $this->getToken($token);
 
         $request = $this->createRequest('DELETE',
-            config('twitch-api.api_url') . '/helix/users/' . $user . '/follows/channels/' . $channel, $token);
+            config('twitch-api.api_url') . '/kraken/users/' . $user . '/follows/channels/' . $channel, $token);
 
         $response = $this->client->send($request);
 

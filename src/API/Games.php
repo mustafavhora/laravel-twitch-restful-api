@@ -18,7 +18,7 @@ class Games extends BaseApi
      */
     public function topGames()
     {
-        $response = $this->client->get('/helix/games/top');
+        $response = $this->client->get('/kraken/games/top');
 
         return $response->json();
     }

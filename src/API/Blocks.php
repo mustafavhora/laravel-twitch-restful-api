@@ -26,7 +26,7 @@ class Blocks extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = config('twitch-api.api_url') . '/helix/users/' . $login . '/blocks';
+        $url = config('twitch-api.api_url') . '/kraken/users/' . $login . '/blocks';
 
         $request = $this->createRequest('GET', $url, $token);
 
@@ -49,7 +49,7 @@ class Blocks extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = 'https://api.twitch.tv/helix/users/' . $user . '/blocks/' . $target;
+        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/blocks/' . $target;
 
         $type = 'PUT';
 
@@ -74,7 +74,7 @@ class Blocks extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = 'https://api.twitch.tv/helix/users/' . $user . '/blocks/' . $target;
+        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/blocks/' . $target;
 
         $type = 'DELETE';
 
