@@ -50,9 +50,7 @@ class Authentication extends BaseApi
             $client = new Client();
 
             $response = $client->post(config('twitch-api.api_url') . '/kraken/oauth2/token?api_version=5', ['body' => $parameters]);
-
-            $response = $response->json();
-
+            $response = json_decode($response->getBody()->getContents(), true);
             if (isset($response[ 'access_token' ])) {
 
                 return $response[ 'access_token' ];

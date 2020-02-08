@@ -30,9 +30,7 @@ class Blocks extends BaseApi
 
         $request = $this->createRequest('GET', $url, $token);
 
-        $blocks = $this->client->send($request);
-
-        return $blocks->json();
+        return $blocks = $this->client->send($request);
     }
 
     /**
@@ -55,9 +53,7 @@ class Blocks extends BaseApi
 
         $request = $this->createRequest($type, $url, $token);
 
-        $response = $this->client->send($request);
-
-        return $response->json();
+        return $response = $this->client->send($request);
     }
 
     /**
@@ -80,8 +76,6 @@ class Blocks extends BaseApi
 
         $request = $this->createRequest($type, $url, $token);
 
-        $response = $this->client->send($request);
-
-        return $response->json();
+        return $response = $this->client->send($request);
     }
 }

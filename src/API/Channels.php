@@ -24,9 +24,7 @@ class Channels extends BaseApi
      */
     public function channel($channel)
     {
-        $channel = $this->client->get(config('twitch-api.api_url') . '/kraken/channels/' . $channel.'?api_version=5');
-
-        return $channel->json();
+        return $channel = $this->client->get(config('twitch-api.api_url') . '/kraken/channels/' . $channel.'?api_version=5');
     }
 
     /**
@@ -45,9 +43,7 @@ class Channels extends BaseApi
 
         $request = $this->createRequest('GET', config('twitch-api.api_url') . '/kraken/channel?api_version=5', $token);
 
-        $channelInfo = $this->client->send($request);
-
-        return $channelInfo->json();
+        return $channelInfo = $this->client->send($request);
     }
 
     /**
@@ -96,9 +92,7 @@ class Channels extends BaseApi
 
         $request = $client->createRequest('PUT', $url, $params);
 
-        $response = $client->send($request);
-
-        return $response->json();
+        return $response = $client->send($request);
     }
 
     /**
@@ -118,9 +112,7 @@ class Channels extends BaseApi
 
         $request = $this->createRequest('DELETE', $url, $token);
 
-        $response = $this->client->send($request);
-
-        return $response->json();
+        return $response = $this->client->send($request);
     }
 
     /**
@@ -143,8 +135,6 @@ class Channels extends BaseApi
 
         $request = $this->client->createRequest('POST', $url, $options);
 
-        $response = $this->client->send($request);
-
-        $response->json();
+        return $response = $this->client->send($request);
     }
 }

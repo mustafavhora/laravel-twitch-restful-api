@@ -21,9 +21,7 @@ class Teams extends BaseApi
      */
     public function teams()
     {
-        $response = $this->client->get('/kraken/teams?api_version=5');
-
-        return $response->json();
+        return $response = $this->client->get('/kraken/teams?api_version=5');
     }
 
     /**
@@ -35,9 +33,6 @@ class Teams extends BaseApi
      */
     public function team($team)
     {
-        $response = $this->client->get('/kraken/teams/' . $team.'?api_version=5');
-
-        return $response->json();
-
+        return $response = $this->client->get('/kraken/teams/' . $team.'?api_version=5');
     }
 }

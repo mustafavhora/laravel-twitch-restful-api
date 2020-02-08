@@ -23,9 +23,7 @@ class Videos extends BaseApi
      */
     public function video($id)
     {
-        $response = $this->client->get('/kraken/videos/' . $id.'?api_version=5');
-
-        return $response->json();
+        return $response = $this->client->get('/kraken/videos/' . $id.'?api_version=5');
     }
 
     /**
@@ -53,9 +51,7 @@ class Videos extends BaseApi
         $parameters = $this->getDefaultHeaders();
         $parameters[ 'query' ] = $query;
 
-        $response = $this->client->get('/kraken/videos/top?api_version=5', $parameters);
-
-        return $response->json();
+        return $response = $this->client->get('/kraken/videos/top?api_version=5', $parameters);
     }
 
     /**
@@ -83,8 +79,6 @@ class Videos extends BaseApi
         $parameters = $this->getDefaultHeaders();
         $parameters[ 'query' ] = $query;
 
-        $response = $this->client->get('/kraken/channels/' . $channel . '/videos?api_version=5', $parameters);
-
-        return $response->json();
+        return $response = $this->client->get('/kraken/channels/' . $channel . '/videos?api_version=5', $parameters);
     }
 }
