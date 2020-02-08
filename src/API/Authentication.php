@@ -25,7 +25,7 @@ class Authentication extends BaseApi
         $scopes = implode('+', config('twitch-api.scopes'));
         $redirectURL = config('twitch-api.redirect_url');
 
-        return config('twitch-api.api_url') . '/kraken/oauth2/authorize?response_type=code&client_id=' . $clientId . '&redirect_uri=' . $redirectURL . '&scope=' . $scopes;
+        return config('twitch-api.api_url') . '/kraken/oauth2/authorize?api_version=5&response_type=code&client_id=' . $clientId . '&redirect_uri=' . $redirectURL . '&scope=' . $scopes;
     }
 
     /**
@@ -49,7 +49,7 @@ class Authentication extends BaseApi
         try {
             $client = new Client();
 
-            $response = $client->post(config('twitch-api.api_url') . '/kraken/oauth2/token', ['body' => $parameters]);
+            $response = $client->post(config('twitch-api.api_url') . '/kraken/oauth2/token?api_version=5', ['body' => $parameters]);
 
             $response = $response->json();
 

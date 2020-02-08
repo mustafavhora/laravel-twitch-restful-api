@@ -34,7 +34,7 @@ class Search extends BaseApi
             }
         }
 
-        $response = $this->client->get('/kraken/search/channels', ['query' => $parameters]);
+        $response = $this->client->get('/kraken/search/channels?api_version=5', ['query' => $parameters]);
 
         return $response->json();
     }
@@ -61,7 +61,7 @@ class Search extends BaseApi
             }
         }
 
-        $response = $this->client->get('/kraken/search/streams', ['query' => $parameters]);
+        $response = $this->client->get('/kraken/search/streams?api_version=5', ['query' => $parameters]);
 
         return $response->json();
     }
@@ -89,7 +89,7 @@ class Search extends BaseApi
             }
         }
 
-        $response = $this->client->get('/kraken/search/games', ['query' => $parameters]);
+        $response = $this->client->get('/kraken/search/games?api_version=5', ['query' => $parameters]);
 
         return $response->json();
     }
@@ -108,7 +108,7 @@ class Search extends BaseApi
      */
     public function streamsChannel($channel)
     {
-        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel);
+        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel.'?api_version=5');
 
         return $response->json();
     }

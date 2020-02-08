@@ -44,7 +44,7 @@ class Subscriptions extends BaseApi
         $parameters = $this->getDefaultHeaders($token);
         $parameters[ 'query' ] = $query;
 
-        $response = $this->client->get('/kraken/channels/' . $channel . '/subscriptions', $parameters);
+        $response = $this->client->get('/kraken/channels/' . $channel . '/subscriptions?api_version=5', $parameters);
 
         return $response->json();
     }
@@ -63,7 +63,7 @@ class Subscriptions extends BaseApi
     public function channelSubscriptionsUser($channel, $user, $token = null)
     {
         $token = $this->getToken($token);
-        $url = 'https://api.twitch.tv/kraken/channels/' . $channel . '/subscriptions/' . $user;
+        $url = 'https://api.twitch.tv/kraken/channels/' . $channel . '/subscriptions/' . $user.'?api_version=5';
 
         $request = $this->createRequest('GET', $url, $token);
 
@@ -86,7 +86,7 @@ class Subscriptions extends BaseApi
     public function userSubscriptionChannel($user, $channel, $token = null)
     {
         $token = $this->getToken($token);
-        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/subscriptions/' . $channel;
+        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/subscriptions/' . $channel.'?api_version=5';
 
         $request = $this->createRequest('GET', $url, $token);
 

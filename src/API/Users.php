@@ -22,7 +22,7 @@ class Users extends BaseApi
      */
     public function user($username)
     {
-        $user = $this->client->get('https://api.twitch.tv/kraken/users/' . $username);
+        $user = $this->client->get('https://api.twitch.tv/kraken/users/' . $username.'?api_version=5');
 
         return $user->json();
     }
@@ -40,7 +40,7 @@ class Users extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $user = $this->client->get('https://api.twitch.tv/kraken/user?oauth_token=' . $token);
+        $user = $this->client->get('https://api.twitch.tv/kraken/user?api_version=5&oauth_token=' . $token);
 
         return $user->json();
     }
@@ -59,7 +59,7 @@ class Users extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $streams = $this->client->get('https://api.twitch.tv/kraken/streams/followed?oauth_token=' . $token);
+        $streams = $this->client->get('https://api.twitch.tv/kraken/streams/followed?api_version=5&oauth_token=' . $token);
 
         return $streams->json();
     }
@@ -78,7 +78,7 @@ class Users extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $videos = $this->client->get('https://api.twitch.tv/kraken/videos/followed?oauth_token=' . $token);
+        $videos = $this->client->get('https://api.twitch.tv/kraken/videos/followed?api_version=5&oauth_token=' . $token);
 
         return $videos->json();
     }
