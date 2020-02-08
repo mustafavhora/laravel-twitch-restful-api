@@ -22,7 +22,7 @@ class Users extends BaseApi
      */
     public function user($username)
     {
-        $user = $this->client->get('https://api.twitch.tv/kraken/users/' . $username);
+        $user = $this->client->get('https://api.twitch.tv/helix/users/' . $username);
 
         return $user->json();
     }
@@ -40,7 +40,7 @@ class Users extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $user = $this->client->get('https://api.twitch.tv/kraken/user?oauth_token=' . $token);
+        $user = $this->client->get('https://api.twitch.tv/helix/user?oauth_token=' . $token);
 
         return $user->json();
     }
@@ -59,7 +59,7 @@ class Users extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $streams = $this->client->get('https://api.twitch.tv/kraken/streams/followed?oauth_token=' . $token);
+        $streams = $this->client->get('https://api.twitch.tv/helix/streams/followed?oauth_token=' . $token);
 
         return $streams->json();
     }
@@ -78,7 +78,7 @@ class Users extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $videos = $this->client->get('https://api.twitch.tv/kraken/videos/followed?oauth_token=' . $token);
+        $videos = $this->client->get('https://api.twitch.tv/helix/videos/followed?oauth_token=' . $token);
 
         return $videos->json();
     }

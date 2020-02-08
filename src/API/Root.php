@@ -20,7 +20,7 @@ class Root extends BaseApi
      */
     public function root()
     {
-        $response = $this->client->get('/kraken');
+        $response = $this->client->get('/helix');
 
         return $response->json();
     }

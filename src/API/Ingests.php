@@ -18,7 +18,7 @@ class Ingests extends BaseApi
      */
     public function ingests()
     {
-        $response = $this->client->get('/kraken/ingests');
+        $response = $this->client->get('/helix/ingests');
 
         return $response->json();
     }

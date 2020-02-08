@@ -24,7 +24,7 @@ class Channels extends BaseApi
      */
     public function channel($channel)
     {
-        $channel = $this->client->get(config('twitch-api.api_url') . '/kraken/channels/' . $channel);
+        $channel = $this->client->get(config('twitch-api.api_url') . '/helix/channels/' . $channel);
 
         return $channel->json();
     }
@@ -43,7 +43,7 @@ class Channels extends BaseApi
     {
         $token = $this->getToken();
 
-        $request = $this->createRequest('GET', config('twitch-api.api_url') . '/kraken/channel', $token);
+        $request = $this->createRequest('GET', config('twitch-api.api_url') . '/helix/channel', $token);
 
         $channelInfo = $this->client->send($request);
 
@@ -70,7 +70,7 @@ class Channels extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = config('twitch-api.api_url') . '/kraken/channels/' . $channel;
+        $url = config('twitch-api.api_url') . '/helix/channels/' . $channel;
 
         $availableOptions = ['status', 'game', 'delay'];
 
@@ -114,7 +114,7 @@ class Channels extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = config('twitch-api.api_url') . '/kraken/channels/' . $channel . '/stream_key';
+        $url = config('twitch-api.api_url') . '/helix/channels/' . $channel . '/stream_key';
 
         $request = $this->createRequest('DELETE', $url, $token);
 

@@ -23,7 +23,7 @@ class Videos extends BaseApi
      */
     public function video($id)
     {
-        $response = $this->client->get('/kraken/videos/' . $id);
+        $response = $this->client->get('/helix/videos/' . $id);
 
         return $response->json();
     }
@@ -53,7 +53,7 @@ class Videos extends BaseApi
         $parameters = $this->getDefaultHeaders();
         $parameters[ 'query' ] = $query;
 
-        $response = $this->client->get('/kraken/videos/top', $parameters);
+        $response = $this->client->get('/helix/videos/top', $parameters);
 
         return $response->json();
     }
@@ -83,7 +83,7 @@ class Videos extends BaseApi
         $parameters = $this->getDefaultHeaders();
         $parameters[ 'query' ] = $query;
 
-        $response = $this->client->get('/kraken/channels/' . $channel . '/videos', $parameters);
+        $response = $this->client->get('/helix/channels/' . $channel . '/videos', $parameters);
 
         return $response->json();
     }
