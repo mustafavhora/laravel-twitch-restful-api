@@ -3,7 +3,6 @@
 
 namespace Skmetaly\TwitchApi\API;
 
-
 /**
  * Class Users
  * API Documentation : https://github.com/justintv/Twitch-API/blob/master/v3_resources/users.md
@@ -22,7 +21,9 @@ class Users extends BaseApi
      */
     public function user($username)
     {
-        return $user = $this->client->get('https://api.twitch.tv/kraken/users/' . $username.'?api_version=5');
+        $response = $this->client->get('https://api.twitch.tv/kraken/users/' . $username . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -36,9 +37,10 @@ class Users extends BaseApi
      */
     public function authenticatedUser($token = null)
     {
-        $token = $this->getToken($token);
-
-        return $user = $this->client->get('https://api.twitch.tv/kraken/user?api_version=5&oauth_token=' . $token);
+        $token    = $this->getToken($token);
+        $response = $this->client->get('https://api.twitch.tv/kraken/user?api_version=5&oauth_token=' . $token);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -53,9 +55,10 @@ class Users extends BaseApi
      */
     public function streamsFollowed($token = null)
     {
-        $token = $this->getToken($token);
-
-        return $streams = $this->client->get('https://api.twitch.tv/kraken/streams/followed?api_version=5&oauth_token=' . $token);
+        $token    = $this->getToken($token);
+        $response = $this->client->get('https://api.twitch.tv/kraken/streams/followed?api_version=5&oauth_token=' . $token);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -70,10 +73,9 @@ class Users extends BaseApi
      */
     public function videosFollowed($token = null)
     {
-        $token = $this->getToken($token);
-
-        $videos = $this->client->get('https://api.twitch.tv/kraken/videos/followed?api_version=5&oauth_token=' . $token);
-
-        return $videos;
+        $token    = $this->getToken($token);
+        $response = $this->client->get('https://api.twitch.tv/kraken/videos/followed?api_version=5&oauth_token=' . $token);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

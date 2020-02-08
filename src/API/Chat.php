@@ -24,7 +24,9 @@ class Chat extends BaseApi
      */
     public function chatChannel($channel)
     {
-        return $response = $this->client->get('kraken/chat/' . $channel.'?api_version=5');
+        $response = $this->client->get('kraken/chat/' . $channel . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -36,7 +38,9 @@ class Chat extends BaseApi
      */
     public function chatBadges($channel)
     {
-        return $response = $this->client->get('kraken/chat/' . $channel . '/badges?api_version=5');
+        $response = $this->client->get('kraken/chat/' . $channel . '/badges?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -46,6 +50,8 @@ class Chat extends BaseApi
      */
     public function chatEmoticons()
     {
-        return $response = $this->client->get('/kraken/chat/emoticons?api_version=5');
+        $response = $this->client->get('/kraken/chat/emoticons?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

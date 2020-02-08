@@ -24,7 +24,9 @@ class Channels extends BaseApi
      */
     public function channel($channel)
     {
-        return $channel = $this->client->get(config('twitch-api.api_url') . '/kraken/channels/' . $channel.'?api_version=5');
+        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/channels/' . $channel . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -39,11 +41,11 @@ class Channels extends BaseApi
      */
     public function authenticatedChannel($token = null)
     {
-        $token = $this->getToken();
-
-        $request = $this->createRequest('GET', config('twitch-api.api_url') . '/kraken/channel?api_version=5', $token);
-
-        return $channelInfo = $this->client->send($request);
+        $token    = $this->getToken();
+        $request  = $this->createRequest('GET', config('twitch-api.api_url') . '/kraken/channel?api_version=5', $token);
+        $response = $this->client->send($request);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -64,12 +66,9 @@ class Channels extends BaseApi
      */
     public function putChannel($channel, $options, $token = null)
     {
-        $token = $this->getToken($token);
-
-        $url = config('twitch-api.api_url') . '/kraken/channels/' . $channel.'?api_version=5';
-
+        $token            = $this->getToken($token);
+        $url              = config('twitch-api.api_url') . '/kraken/channels/' . $channel . '?api_version=5';
         $availableOptions = ['status', 'game', 'delay'];
-
         //  Filter the available options
         foreach ($availableOptions as $option) {
 
@@ -78,21 +77,17 @@ class Channels extends BaseApi
                 $channelOptions[ $option ] = $options[ $option ];
             }
         }
-
         //  Get the default headers that are for all requests
         $params = $this->getDefaultHeaders($token);
-
         //  We send data through json
-        $params[ 'headers' ][ 'Content-type' ] = ['application/json'];
-
+        $params['headers']['Content-type'] = ['application/json'];
         //  Data
-        $params[ 'json' ] = ['channel' => $channelOptions];
-
-        $client = new Client();
-
-        $request = $client->createRequest('PUT', $url, $params);
-
-        return $response = $client->send($request);
+        $params['json'] = ['channel' => $channelOptions];
+        $client         = new Client();
+        $request        = $client->createRequest('PUT', $url, $params);
+        $response       = $client->send($request);
+        $response       = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -106,13 +101,12 @@ class Channels extends BaseApi
      */
     public function deleteStreamKey($channel, $token = null)
     {
-        $token = $this->getToken($token);
-
-        $url = config('twitch-api.api_url') . '/kraken/channels/' . $channel . '/stream_key?api_version=5';
-
-        $request = $this->createRequest('DELETE', $url, $token);
-
-        return $response = $this->client->send($request);
+        $token    = $this->getToken($token);
+        $url      = config('twitch-api.api_url') . '/kraken/channels/' . $channel . '/stream_key?api_version=5';
+        $request  = $this->createRequest('DELETE', $url, $token);
+        $response = $this->client->send($request);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -120,21 +114,18 @@ class Channels extends BaseApi
      * Authenticated, required scope: channel_commercial
      *
      * @param      $channel
-     * @param int  $length
+     * @param int $length
      * @param null $token
      */
     public function postCommercial($channel, $length = 30, $token = null)
     {
-        $token = $this->getToken($token);
-
-        $url = config('twitch-api.api_url') . '/channels/' . $channel . '/commercial';
-
-        $options = $this->getDefaultHeaders($token);
-
-        $options[ 'body' ] = ['length' => $length];
-
-        $request = $this->client->createRequest('POST', $url, $options);
-
-        return $response = $this->client->send($request);
+        $token           = $this->getToken($token);
+        $url             = config('twitch-api.api_url') . '/channels/' . $channel . '/commercial';
+        $options         = $this->getDefaultHeaders($token);
+        $options['body'] = ['length' => $length];
+        $request         = $this->client->createRequest('POST', $url, $options);
+        $response        = $this->client->send($request);
+        $response        = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

@@ -22,9 +22,9 @@ class Streams extends BaseApi
      */
     public function streamsChannel($channel)
     {
-        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel.'?api_version=5');
-
-        return $response->json();
+        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -48,10 +48,9 @@ class Streams extends BaseApi
                 $parameters[ $option ] = $options[ $option ];
             }
         }
-
         $response = $this->client->get('/kraken/streams/?api_version=5', ['query' => $parameters]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -75,10 +74,9 @@ class Streams extends BaseApi
                 $parameters[ $option ] = $options[ $option ];
             }
         }
-
         $response = $this->client->get('/kraken/streams/featured?api_version=5', ['query' => $parameters]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -102,9 +100,8 @@ class Streams extends BaseApi
                 $parameters[ $option ] = $options[ $option ];
             }
         }
-
         $response = $this->client->get('/kraken/streams/summary?api_version=5', ['query' => $parameters]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

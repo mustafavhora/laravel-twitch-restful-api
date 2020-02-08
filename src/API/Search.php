@@ -33,10 +33,9 @@ class Search extends BaseApi
                 $parameters[ $option ] = $options[ $option ];
             }
         }
-
         $response = $this->client->get('/kraken/search/channels?api_version=5', ['query' => $parameters]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -60,10 +59,9 @@ class Search extends BaseApi
                 $parameters[ $option ] = $options[ $option ];
             }
         }
-
         $response = $this->client->get('/kraken/search/streams?api_version=5', ['query' => $parameters]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
 
@@ -88,10 +86,9 @@ class Search extends BaseApi
                 $parameters[ $option ] = $options[ $option ];
             }
         }
-
         $response = $this->client->get('/kraken/search/games?api_version=5', ['query' => $parameters]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -108,9 +105,9 @@ class Search extends BaseApi
      */
     public function streamsChannel($channel)
     {
-        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel.'?api_version=5');
-
-        return $response->json();
+        $response = $this->client->get(config('twitch-api.api_url') . '/kraken/streams/' . $channel . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
 }

@@ -23,7 +23,9 @@ class Videos extends BaseApi
      */
     public function video($id)
     {
-        return $response = $this->client->get('/kraken/videos/' . $id.'?api_version=5');
+        $response = $this->client->get('/kraken/videos/' . $id . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -36,22 +38,18 @@ class Videos extends BaseApi
     public function videosTop($options = [])
     {
         $availableOptions = ['limit', 'offset', 'game', 'period'];
-
-        $query = [];
-
+        $query            = [];
         //  Filter the available options
         foreach ($availableOptions as $option) {
-
             if (isset($options[ $option ])) {
-
                 $query[ $option ] = $options[ $option ];
             }
         }
-
-        $parameters = $this->getDefaultHeaders();
-        $parameters[ 'query' ] = $query;
-
-        return $response = $this->client->get('/kraken/videos/top?api_version=5', $parameters);
+        $parameters          = $this->getDefaultHeaders();
+        $parameters['query'] = $query;
+        $response            = $this->client->get('/kraken/videos/top?api_version=5', $parameters);
+        $response            = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -64,21 +62,17 @@ class Videos extends BaseApi
     public function channelsVideo($channel, $options = null)
     {
         $availableOptions = ['limit', 'offset', 'broadcasts', 'hls'];
-
-        $query = [];
-
+        $query            = [];
         //  Filter the available options
         foreach ($availableOptions as $option) {
-
             if (isset($options[ $option ])) {
-
                 $query[ $option ] = $options[ $option ];
             }
         }
-
-        $parameters = $this->getDefaultHeaders();
-        $parameters[ 'query' ] = $query;
-
-        return $response = $this->client->get('/kraken/channels/' . $channel . '/videos?api_version=5', $parameters);
+        $parameters          = $this->getDefaultHeaders();
+        $parameters['query'] = $query;
+        $response            = $this->client->get('/kraken/channels/' . $channel . '/videos?api_version=5', $parameters);
+        $response            = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

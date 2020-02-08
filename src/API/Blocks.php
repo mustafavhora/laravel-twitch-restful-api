@@ -24,13 +24,12 @@ class Blocks extends BaseApi
      */
     public function blocks($login, $token = null)
     {
-        $token = $this->getToken($token);
-
-        $url = config('twitch-api.api_url') . '/kraken/users/' . $login . '/blocks?api_version=5';
-
-        $request = $this->createRequest('GET', $url, $token);
-
-        return $blocks = $this->client->send($request);
+        $token    = $this->getToken($token);
+        $url      = config('twitch-api.api_url') . '/kraken/users/' . $login . '/blocks?api_version=5';
+        $request  = $this->createRequest('GET', $url, $token);
+        $response = $this->client->send($request);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -45,15 +44,13 @@ class Blocks extends BaseApi
      */
     public function putBlock($user, $target, $token = null)
     {
-        $token = $this->getToken($token);
-
-        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/blocks/' . $target.'?api_version=5';
-
-        $type = 'PUT';
-
-        $request = $this->createRequest($type, $url, $token);
-
-        return $response = $this->client->send($request);
+        $token    = $this->getToken($token);
+        $url      = 'https://api.twitch.tv/kraken/users/' . $user . '/blocks/' . $target . '?api_version=5';
+        $type     = 'PUT';
+        $request  = $this->createRequest($type, $url, $token);
+        $response = $this->client->send($request);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -70,12 +67,14 @@ class Blocks extends BaseApi
     {
         $token = $this->getToken($token);
 
-        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/blocks/' . $target.'?api_version=5';
+        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/blocks/' . $target . '?api_version=5';
 
         $type = 'DELETE';
 
         $request = $this->createRequest($type, $url, $token);
 
-        return $response = $this->client->send($request);
+        $response = $this->client->send($request);
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

@@ -41,11 +41,10 @@ class Follow extends BaseApi
             }
         }
 
-        $url = 'https://api.twitch.tv/kraken/channels/' . $channel . '/follows?api_version=5';
-
+        $url      = 'https://api.twitch.tv/kraken/channels/' . $channel . '/follows?api_version=5';
         $response = $this->client->get($url, ['body' => $options]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -74,12 +73,10 @@ class Follow extends BaseApi
                 $options[ $option ] = $options[ $option ];
             }
         }
-
-        $url = 'kraken/users/' . $user . '/follows/channels?api_version=5';
-
+        $url      = 'kraken/users/' . $user . '/follows/channels?api_version=5';
         $response = $this->client->get($url, ['body' => $options]);
-
-        return $response->json();
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -92,16 +89,16 @@ class Follow extends BaseApi
      */
     public function userFollowsChannel($user, $channel)
     {
-        $response = $this->client->get('kraken/users/' . $user . '/follows/channels/' . $channel.'?api_version=5');
-
-        return $response->json();
+        $response = $this->client->get('kraken/users/' . $user . '/follows/channels/' . $channel . '?api_version=5');
+        $response = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     public function authenticatedUserFollowsChannel($user, $channel, $options = null, $token = null)
     {
         $token = $this->getToken($token);
 
-        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/follows/channels/' . $channel.'?api_version=5';
+        $url = 'https://api.twitch.tv/kraken/users/' . $user . '/follows/channels/' . $channel . '?api_version=5';
 
         $availableOptions = ['notifications'];
 
@@ -120,18 +117,15 @@ class Follow extends BaseApi
         $params = $this->getDefaultHeaders($token);
 
         //  We send data through json
-        $params[ 'headers' ][ 'Content-type' ] = ['application/json'];
+        $params['headers']['Content-type'] = ['application/json'];
 
         //  Data
-        $params[ 'body' ] = $channelOptions;
-
-        $client = new Client();
-
-        $request = $client->createRequest('PUT', $url, $params);
-
-        $response = $client->send($request);
-
-        return $response->json();
+        $params['body'] = $channelOptions;
+        $client         = new Client();
+        $request        = $client->createRequest('PUT', $url, $params);
+        $response       = $client->send($request);
+        $response       = json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     /**
@@ -148,17 +142,12 @@ class Follow extends BaseApi
     public function authenticatedUserUnfollowsChannel($user, $channel, $token = null)
     {
         $token = $this->getToken($token);
-
-        $request = $this->createRequest('DELETE',
-            config('twitch-api.api_url') . '/kraken/users/' . $user . '/follows/channels/' . $channel.'?api_version=5', $token);
-
+        $request  = $this->createRequest('DELETE',
+            config('twitch-api.api_url') . '/kraken/users/' . $user . '/follows/channels/' . $channel . '?api_version=5', $token);
         $response = $this->client->send($request);
-
         if ($response->getStatusCode() == 204) {
-
             return true;
         }
-
         return false;
     }
 }
